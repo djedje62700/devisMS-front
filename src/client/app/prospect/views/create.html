@@ -1,0 +1,63 @@
+<section class="mainbar" data-ng-init="vm.setFormFields()">
+
+
+    <div class="panel-body">
+
+      <form data-ng-submit="vm.create()" novalidate>
+
+        <formly-form model="vm.prospect" fields="vm.formFields" form="vm.form">
+        </formly-form>
+
+         <input type="file" id="selectFiles" value="Import" /><br />
+           <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="import">Importer le devis</a>
+
+        <hr/>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
+              <i class="glyphicon glyphicon-ok"></i> Save
+            </button>
+            <a class="btn btn-danger" href="/prospect">
+              <i class="glyphicon glyphicon-remove"></i> Cancel
+            </a>
+        </div>
+
+        <div data-ng-show="vm.error" class="alert alert-danger form-group">
+          <strong data-ng-bind="vm.error"></strong>
+        </div>
+
+      </form>
+
+  </div>
+
+  <script>
+document.getElementById('import').onclick = function () {
+    var files = document.getElementById('selectFiles').files;
+    if(files.length <= 0){
+        return false;
+    }
+
+    var fr = new FileReader();
+
+    fr.onload = function(e) {
+        var result = JSON.parse(e.target.result);
+        var formatted = JSON.stringify(result, null, 2);
+        var devis1 = document.getElementById('formly_1_textarea_devis_6');
+        var devis2 = document.getElementById('formly_3_textarea_devis_6');
+        console.log(formatted);
+        if(devis1 === null ){
+          document.getElementById('formly_3_textarea_devis_6').value = formatted;
+           $('#formly_3_textarea_devis_6').change();
+        }
+        else {
+            document.getElementById('formly_1_textarea_devis_6').value = formatted;
+             $('#formly_1_textarea_devis_6').change();
+        }
+    }
+
+    fr.readAsText(files.item(0));
+};</script>
+
+
+  
+
+</section>

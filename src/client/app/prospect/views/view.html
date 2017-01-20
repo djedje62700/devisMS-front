@@ -1,0 +1,28 @@
+<section class="mainbar" data-ng-init="vm.toViewProspect()">
+
+
+
+    <div class="panel-body">
+
+      <form novalidate>
+        <formly-form model="vm.prospect" fields="vm.formFields">
+        </formly-form>
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="/prospect/{{vm.prospect.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> Editer
+        </a>
+        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.prospect">
+          <i class="glyphicon glyphicon-remove-circle"></i> Supprimer
+        </a>
+        <a class="btn btn-primary" href="/prospect">
+          <i class="glyphicon glyphicon-list"></i> Liste des prospects
+        </a>
+      </div>
+
+    </div>
+
+
+</section>

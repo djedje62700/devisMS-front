@@ -1,0 +1,46 @@
+<section class="mainbar">
+
+
+
+
+<center><h2><span class="glyphicon glyphicon-user"></span> Gestion des prospects</h2></center>
+
+
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input ng-model="searchProspect" class="mdl-textfield__input" type="text" id="sample1">
+  <label class="mdl-textfield__label" for="sample1">Rechercher un prospect...</label>
+</div>
+
+
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" ng-table="vm.tableParams" show-filter="false">
+          <tr ng-repeat="prospect in $data | filter:searchProspect">
+              <td class="mdl-data-table__cell--non-numeric" data-title="'Nom'">{{prospect.name}}</td>
+              <td class="mdl-data-table__cell--non-numeric" data-title="'Prénom'">{{prospect.firstname}}</td>
+              <td class="mdl-data-table__cell--non-numeric" data-title="'Adresse'">{{prospect.address}}</td>
+              <td class="mdl-data-table__cell--non-numeric" data-title="'Pays'">{{prospect.country}}</td>
+              <td class="mdl-data-table__cell--non-numeric" data-title="'Téléphone'">{{prospect.phoneNumber}}</td>
+              <td class="mdl-data-table__cell--non-numeric" data-title="'Email'">{{prospect.mailAddress}}</td>
+              <td class="mdl-data-table__cell--non-numeric">
+
+
+                      <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" title="Edit" href="/prospect/{{prospect.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" title="Remove" ng-really-message="Etes vous sur de vouloir supprimer ce prospect ?" ng-really-click="vm.remove(prospect)" item="prospect">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+
+              </td>
+          </tr>
+      </table>
+
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success fab" href="/prospect/create">
+          <i class="glyphicon glyphicon-plus"></i>
+        </a>
+      </div>
+
+
+</section>

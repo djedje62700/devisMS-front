@@ -1,0 +1,96 @@
+<section class="mainbar" data-ng-init="vm.toEditProspect()">
+
+
+
+  <!-- Wide card with share menu button -->
+  <style>
+  .demo-card-wide.mdl-card {
+    width: 100%;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: url('https://www.prospect.org.uk/zc/modules/Prospect/images/xlogo.png.pagespeed.ic.TzLckRytSJ.png') center / cover;
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+  </style>
+
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Edition du prospect {{vm.prospect.firstname}} {{vm.prospect.name}}</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <form data-ng-submit="vm.update()" novalidate>
+
+        <formly-form model="vm.prospect" fields="vm.formFields" form="vm.form">
+        </formly-form>
+        
+           <input type="file" id="selectFiles" value="Import" /><br />
+           <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="import">Importer le devis</a>
+
+
+
+
+  
+
+        <hr/>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
+              <i class="glyphicon glyphicon-ok"></i> Enregistrer
+            </button>
+            <a class="btn btn-danger" href="/prospect">
+              <i class="glyphicon glyphicon-remove"></i> Annuler
+            </a>
+        </div>
+
+        <div data-ng-show="vm.error" class="alert alert-danger form-group">
+          <strong data-ng-bind="vm.error"></strong>
+        </div>
+      </form>
+    </div>
+  
+    <div class="mdl-card__menu">
+      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">share</i>
+      </button>
+    </div>
+  </div>
+
+
+
+
+ <script>
+document.getElementById('import').onclick = function () {
+    var files = document.getElementById('selectFiles').files;
+    if(files.length <= 0){
+        return false;
+    }
+
+    var fr = new FileReader();
+
+    fr.onload = function(e) {
+        var result = JSON.parse(e.target.result);
+        var formatted = JSON.stringify(result, null, 2);
+        var devis1 = document.getElementById('formly_1_textarea_devis_6');
+        var devis2 = document.getElementById('formly_3_textarea_devis_6');
+        console.log(formatted);
+        if(devis1 === null ){
+          document.getElementById('formly_3_textarea_devis_6').value = formatted;
+           $('#formly_3_textarea_devis_6').change();
+        }
+        else {
+            document.getElementById('formly_1_textarea_devis_6').value = formatted;
+             $('#formly_1_textarea_devis_6').change();
+        }
+    }
+
+    fr.readAsText(files.item(0));
+};</script>
+
+
+
+
+
+</section>

@@ -1,0 +1,24 @@
+
+﻿<div ng-controller="SidebarController as vm">
+<nav>
+    <ht-sidebar when-done-animating="vm.sidebarReady()">
+
+        <div class="sidebar-filler"></div>
+        <div class="sidebar-inner">
+          <div class="app-title">Madera Devis</div>
+            <ul class="navi">
+                <li class="nlightblue fade-selection-animation" ng-class="vm.isCurrent(r)"
+                    ng-repeat="r in vm.navRoutes">
+                    <a ui-sref="{{r.name}}"
+                       ng-bind-html="r.settings.content"></a>
+                     
+                </li>
+                <li><a href="/customer"><i class="fa fa-paper-plane" aria-hidden="true"></i>Clients</li>
+                <li><a href="http://localhost:8000"><i class="fa fa-home"  aria-hidden="true"></i>Retour à l'accueil</li>
+                
+            </ul>
+        </div>
+
+    </ht-sidebar>
+    </nav>
+</div>
