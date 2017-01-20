@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "private" : false,
   "scripts": {
-    "postinstall": "bower install",
     "init": "npm install",
     "install": "bower install",
     "start": "node src/server/app.js",
