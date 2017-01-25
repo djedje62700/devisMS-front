@@ -7,6 +7,7 @@
 
     ProspectController.$inject = ['logger',
         '$stateParams',
+        '$http',
         '$location',
         'Prospect',
         'TableSettings',
@@ -14,13 +15,14 @@
     /* @ngInject */
     function ProspectController(logger,
         $stateParams,
+         $http,
         $location,
         Prospect,
         TableSettings,
         ProspectForm) {
 
         var vm = this;
-
+        const baseurl = "https://madera-finance-ms-server.herokuapp.com/customer";
         vm.tableParams = TableSettings.getParams(Prospect);
         vm.prospect = {};
 
@@ -62,7 +64,7 @@
 
         // Update existing Prospect
         vm.update = function() {
-        
+
             var prospect = vm.prospect;
             prospect.$update(function() {
                 logger.success('Prospect mis à jour');
@@ -82,6 +84,24 @@
             vm.prospect = Prospect.get({prospectId: $stateParams.prospectId});
             vm.setFormFields(false);
         };
+
+
+        function getAllCustomer(){
+            $http.get(baseurl).then(function success(response) {
+                vm.customer = response.data;
+                console.log(vm.customer);
+            },function error(response) {
+                console.log(response.statusText);
+            })
+        }
+
+        getAllCustomer();
+
+        vm.getCurrentCustomer = function (customer) {
+          vm.currentCustomer = customer;
+          console.log(vm.currentCustomer);
+        };
+
 
         activate();
 

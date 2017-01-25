@@ -28,6 +28,34 @@
                 }
             },
             {
+                state : "customer",
+                config : {
+                    url: "/customer",
+                    templateUrl : "app/customer/customer.html",
+                    controller: 'ProspectController',
+                    controllerAs: 'vm',
+                    title : "List customer",
+                    settings : {
+                        nav : 4,
+                        content : '<i class="fa fa-home"></i>Clients'
+                    }
+
+                }
+
+            },
+            {
+                state : "editCustomer",
+                config : {
+                    url: "customer/:customerId/editCustomer",
+                    templateUrl : "app/customer/editCustomer.html",
+                    controller: 'ProspectController',
+                    controllerAs: 'vm',
+                    title : "Edit customer"
+
+                }
+
+            },
+            {
                 state: 'createProspect',
                 config: {
                     url: '/prospect/create',
