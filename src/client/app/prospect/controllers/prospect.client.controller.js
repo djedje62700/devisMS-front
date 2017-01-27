@@ -37,7 +37,7 @@
             // Redirect after save
             prospect.$save(function(response) {
                 logger.success('Prospect created');
-                $location.path('prospect/' + response.id);
+                $location.path('prospect/');
             }, function(errorResponse) {
                 vm.error = errorResponse.data.summary;
             });
